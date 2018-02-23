@@ -10,11 +10,11 @@ import UIKit
 import Parse
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var messages = [PFObject]()
+    var chatMessage = [PFObject]()
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if messages != nil{
-            return messages.count
+        if chatMessage != nil{
+            return chatMessage.count
         }
         else
         {
@@ -24,8 +24,14 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatsList.dequeueReusableCell(withIdentifier: "MessageCell", for : indexPath) as! MessageCell
-        //cell.business = businesses[indexPath.row]
-        
+        //cell.chatMessage = chatMessage[indexPath.row]
+      /*  if let user = chatMessage["user"] as? PFUser {
+            // User found! update username label with username
+            cell.usernameLabel.text = user.username
+        } else {
+            // No user found, set default username
+            cell.usernameLabel.text = "🤖"
+        }*/
         return cell
     }
     
@@ -43,11 +49,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         chatsList.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         chatsList.estimatedRowHeight = 50
+       // fetchMessages()
+        //chatsList.reloadData()
         
     }
     
     @IBAction func clickSend(_ sender: Any) {
         sendChatMessage()
+        fetchMessages()
+        chatsList.reloadData()
+
     }
 
     //When the user taps the "Send" button, create a new Message of type PFObject and save it to Parse
@@ -68,16 +79,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func fetchMessages() {
         // Fetch messages from Parse
         print("Timer running")
+        onTimer()
         //let predicate = NSPredicate(format: "likesCount > 100")
 
         let query = PFQuery(className: "Message")
-        query.limit = 50
+       // query.limit = 50
         query.addDescendingOrder("createdAt")
-        query.findObjectsInBackground { (messages: [PFObject]?, error: Error?) in
-            if let messages = messages {
+        query.includeKey("user")
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            if let objects = objects{
                 print("saved messages")
-                self.messages = messages
-                print("\(String(describing: self.messages.first!["text"]!))")
+                self.chatMessage = objects
+                print("\(String(describing: self.chatMessage.first!["text"]!))")
                 self.chatsList.reloadData()
             } else {
                 print("Error from chat view controller trying to get messages in fetchMessages() function with localized description \"\(error!.localizedDescription)\"")
