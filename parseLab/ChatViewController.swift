@@ -74,8 +74,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let messages = messages {
                 print("saved messages")
                 self.messages = messages
-                print("\(String(describing: self.messages?.first!["text"]!))")
-                self.tableView.reloadData()
+                print("\(String(describing: self.messages.first!["text"]!))")
+                self.chatsList.reloadData()
             } else {
                 print("Error from chat view controller trying to get messages in fetchMessages() function with localized description \"\(error!.localizedDescription)\"")
             }
