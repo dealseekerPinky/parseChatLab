@@ -68,7 +68,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func fetchMessages() {
         // Fetch messages from Parse
         print("Timer running")
+        //let predicate = NSPredicate(format: "likesCount > 100")
+
         let query = PFQuery(className: "Message")
+        query.limit = 50
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (messages: [PFObject]?, error: Error?) in
             if let messages = messages {
@@ -82,6 +85,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
