@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var messages = [PFObject(className: "Message")]
+    var messages = [PFObject]()
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if messages != nil{
