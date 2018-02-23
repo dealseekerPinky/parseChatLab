@@ -13,7 +13,8 @@
 		741164DE203E79FB00A0EDB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 741164DD203E79FB00A0EDB3 /* Assets.xcassets */; };
 		741164E1203E79FB00A0EDB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741164DF203E79FB00A0EDB3 /* LaunchScreen.storyboard */; };
 		741164E9203E7BF200A0EDB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741164E8203E7BF200A0EDB3 /* LoginViewController.swift */; };
-		741164EB203E868200A0EDB3 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741164EA203E868200A0EDB3 /* AlertController.swift */; };
+		741164ED203FE0E100A0EDB3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741164EC203FE0E100A0EDB3 /* ChatViewController.swift */; };
+		741164EF203FE73200A0EDB3 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741164EE203FE73200A0EDB3 /* MessageCell.swift */; };
 		7DFE0BCECCDDF2C2307CE4DB /* Pods_parseLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43361BEA68D8CAFD3F16BCE7 /* Pods_parseLab.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +30,8 @@
 		741164E0203E79FB00A0EDB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		741164E2203E79FB00A0EDB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		741164E8203E7BF200A0EDB3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		741164EA203E868200A0EDB3 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		741164EC203FE0E100A0EDB3 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		741164EE203FE73200A0EDB3 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +83,8 @@
 				741164DF203E79FB00A0EDB3 /* LaunchScreen.storyboard */,
 				741164E2203E79FB00A0EDB3 /* Info.plist */,
 				741164E8203E7BF200A0EDB3 /* LoginViewController.swift */,
-				741164EA203E868200A0EDB3 /* AlertController.swift */,
+				741164EC203FE0E100A0EDB3 /* ChatViewController.swift */,
+				741164EE203FE73200A0EDB3 /* MessageCell.swift */,
 			);
 			path = parseLab;
 			sourceTree = "<group>";
@@ -225,9 +228,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				741164EB203E868200A0EDB3 /* AlertController.swift in Sources */,
 				741164E9203E7BF200A0EDB3 /* LoginViewController.swift in Sources */,
+				741164EF203FE73200A0EDB3 /* MessageCell.swift in Sources */,
 				741164D9203E79FB00A0EDB3 /* ViewController.swift in Sources */,
+				741164ED203FE0E100A0EDB3 /* ChatViewController.swift in Sources */,
 				741164D7203E79FB00A0EDB3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
