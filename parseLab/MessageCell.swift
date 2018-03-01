@@ -14,8 +14,7 @@ class MessageCell: UITableViewCell {
     
     @IBOutlet weak var usernameLabel: UILabel!
 
-        
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

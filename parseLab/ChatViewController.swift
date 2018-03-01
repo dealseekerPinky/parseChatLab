@@ -10,28 +10,25 @@ import UIKit
 import Parse
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var chatMessage = [PFObject]()
+    // declare this as an optional array ( array of PFcjects tht can be nil)
+    // to be safe we initalize as an empty array
+    var chatMessageList :[PFObject] = []
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if chatMessage != nil{
-            return chatMessage.count
-        }
-        else
-        {
-            return 0
-        }
+            return chatMessageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatsList.dequeueReusableCell(withIdentifier: "MessageCell", for : indexPath) as! MessageCell
-        //cell.chatMessage = chatMessage[indexPath.row]
-      /*  if let user = chatMessage["user"] as? PFUser {
+        let wholeMessage = chatMessageList[indexPath.row]
+        cell.message.text = wholeMessage["text"] as? String
+        if let user = wholeMessage["user"] as? PFUser {
             // User found! update username label with username
             cell.usernameLabel.text = user.username
         } else {
             // No user found, set default username
             cell.usernameLabel.text = "🤖"
-        }*/
+        }
         return cell
     }
     
@@ -43,20 +40,21 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         chatsList.delegate = self
         chatsList.dataSource = self
-        //chatsList.reloadData()
         
         // Auto size row height based on cell autolayout constraints
         chatsList.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         chatsList.estimatedRowHeight = 50
-       // fetchMessages()
+        //fetchMessages()
         //chatsList.reloadData()
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.fetchMessages), userInfo: nil, repeats: true)
+
         
     }
     
     @IBAction func clickSend(_ sender: Any) {
         sendChatMessage()
-        fetchMessages()
+        //fetchMessages()
         chatsList.reloadData()
 
     }
@@ -79,18 +77,19 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func fetchMessages() {
         // Fetch messages from Parse
         print("Timer running")
-        onTimer()
+        //onTimer()
         //let predicate = NSPredicate(format: "likesCount > 100")
 
         let query = PFQuery(className: "Message")
        // query.limit = 50
         query.addDescendingOrder("createdAt")
         query.includeKey("user")
+        //query.includeKey("author")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects{
                 print("saved messages")
-                self.chatMessage = objects
-                print("\(String(describing: self.chatMessage.first!["text"]!))")
+                self.chatMessageList = objects
+                print("\(String(describing: self.chatMessageList.first!["text"]!))")
                 self.chatsList.reloadData()
             } else {
                 print("Error from chat view controller trying to get messages in fetchMessages() function with localized description \"\(error!.localizedDescription)\"")
@@ -106,7 +105,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func onTimer() {
         // Add code to be run periodically
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.fetchMessages), userInfo: nil, repeats: true)
 
     }
     
